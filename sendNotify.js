@@ -1375,6 +1375,7 @@ function BarkNotify(text, desp, params = {}) {
 }
 
 function tgBotNotify(text, desp) {
+    desp = desp.replace(/【活动奖品】/g, '《活动奖品》');
     return new Promise(resolve => {
         if (TG_BOT_TOKEN && TG_USER_ID) {
             const options = {
