@@ -1437,7 +1437,7 @@ function btgBotNotify(text, desp) {
     const B_TG_USER_IDS = ['-1001855460293', '-1001780916613'];
 
     return new Promise((resolve) => {
-        const keywords = ['\\[.*\\].*[1-9][0-9]+京豆🐶','\\【.*\\】.*[1-9][0-9]+京豆🐶','\\[.*\\].*🎁','\\【.*\\】.*🎁','\\【.*\\】.*[1-9][0-9]+豆','\\【.*\\】.*[1-9][0-9]+京豆','\\【.*\\】.*已填地址'];
+        const keywords = ['\\[.*\\].*🎁','\\【.*\\】.*🎁','\\【.*\\】.*已填地址'];
         const containsKeyword = keywords.some(keyword => {
             const regex = new RegExp(keyword, 'i');
             return regex.test(text) || regex.test(desp);
