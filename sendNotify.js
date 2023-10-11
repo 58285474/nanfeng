@@ -1452,7 +1452,7 @@ function btgBotNotify(text, desp) {
         for (const userId of B_TG_USER_IDS) {
             const options = {
                 url: `https://api.telegram.org/bot${B_TG_BOT_TOKEN}/sendMessage`,
-                body: `chat_id=${userId}&text=${text}\n\n${desp}&disable_web_page_preview=true`,
+                body: `chat_id=${userId}&text=${encodeURIComponent(text)}\n\n${encodeURIComponent(desp)}&disable_web_page_preview=true`,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
