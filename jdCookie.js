@@ -12,6 +12,7 @@
  */
 //此处填写京东账号cookie。
 require("global-agent/bootstrap");
+console.log("🚀 启动 global-agent全局代理中");
 
 let CookieJDs = [
 ]
