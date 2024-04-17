@@ -1106,7 +1106,7 @@ async function isLoginByX1a0He(cookie) {
             headers: {
                 "Cookie": cookie,
                 "referer": "https://h5.m.jd.com/",
-                "User-Agent": "jdapp;iPhone;10.1.2;15.0;network/wifi;Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1",
+                "User-Agent": "jdapp;iPhone;12.6.0;15.0;network/wifi;Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1",
             },
         }
         $.get(options, (err, resp, data) => {
