@@ -1437,7 +1437,7 @@ function sleep(ms) {
 
 async function btgBotNotify(text, desp) {
     const B_TG_BOT_TOKEN = '5510278753:AAFTU18yv8Oj_81yqyrGESnWW5IhBVCyZWs';
-    const B_TG_USER_IDS = ['-1002074923852', '-1001780916613', '-1002024890629'];
+    const B_TG_USER_IDS = ['-1002074923852','-1001780916613','-1002054185856'];
 
     return new Promise(async (resolve) => {
         const keywords = [/(〖|【).*(〗|】).*((\(已填地址\))?🎁|(?<!积分,)(?<!\()已填地址(?!\))|(?<!积分,已填地址)兑换成功)/];
