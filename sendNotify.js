@@ -1456,7 +1456,7 @@ function btgBotNotify(text, desp) {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                timeout: 600,000,
+                timeout: 600000,
             };
 
             $.post(options, (err, resp, data) => {
