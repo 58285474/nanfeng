@@ -1431,27 +1431,38 @@ function tgBotNotify(text, desp) {
     })
 }
 
-function btgBotNotify(text, desp) {
-
-    const B_TG_BOT_TOKENS = ['7407258364:AAHssT6nt-ru3wRVOVehNc9ysgzhP1gtuhQ', '5510278753:AAFTU18yv8Oj_81yqyrGESnWW5IhBVCyZWs', '7145199009:AAGeLI2I-IqWpn_7-3IxMrqFN7DVYqHs-As', '7449798041:AAGVBHiq6qCcC5R1EAf2vEXX8WeEmVqQbO8'];
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+async function btgBotNotify(text, desp) {
+    const B_TG_BOT_TOKENS = [
+        '7407258364:AAHssT6nt-ru3wRVOVehNc9ysgzhP1gtuhQ',
+        '5510278753:AAFTU18yv8Oj_81yqyrGESnWW5IhBVCyZWs',
+		'7145199009:AAGeLI2I-IqWpn_7-3IxMrqFN7DVYqHs-As',
+		'7449798041:AAGVBHiq6qCcC5R1EAf2vEXX8WeEmVqQbO8'
+    ];
     const B_TG_USER_IDS = ['-1002074923852', '-1001780916613', '-1002024890629'];
 
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve) => {
         const keywords = [/(〖|【).*(〗|】).*((\(已填地址\))?🎁|(?<!积分,)(?<!\()已填地址(?!\))|(?<!积分,已填地址)兑换成功)/];
-        const sendMessageWithToken = (tokenIndex) => {
-            return new Promise((innerResolve, innerReject) => {
-                const token = B_TG_BOT_TOKENS[tokenIndex];
-                const userId = B_TG_USER_IDS[tokenIndex];
+        const containsKeyword = keywords.some(keyword => {
+            const regex = new RegExp(keyword, 'i');
+            return regex.test(text) || regex.test(desp);
+        });
 
-                const containsKeyword = keywords.some(keyword => {
-                    const regex = new RegExp(keyword, 'i');
-                    return regex.test(text) || regex.test(desp);
-                });
+        if (!containsKeyword) {
+            console.log('Telegram实物机器人消息中未包含关键词，不推送❌。\n');
+            resolve();
+            return;
+        }
 
-                if (!containsKeyword) {
-                    console.log('Telegram实物机器人消息中未包含关键词，不推送❌。\n');
-                    innerResolve();
-                    return;
+        let successChannels = new Set();
+
+        for (const token of B_TG_BOT_TOKENS) {
+            for (const userId of B_TG_USER_IDS) {
+                if (successChannels.has(userId)) {
+                    console.log(`频道 ${userId} 已成功发送过消息，跳过重复发送。\n`);
+                    continue; // Skip if channel has already been successfully notified
                 }
 
                 const options = {
@@ -1463,50 +1474,37 @@ function btgBotNotify(text, desp) {
                     timeout: 5000,
                 };
 
-                $.post(options, (err, resp, data) => {
-                    try {
-                        if (err) {
-                            console.log(`telegram发送通知消息失败，尝试使用下一个Token。Error: ${err}\n`);
-                            innerReject(err);
-                        } else {
-                            data = JSON.parse(data);
-                            if (data.ok) {
-                                console.log('Telegram（实物中奖消息）发送通知消息成功🎉。\n');
-                                innerResolve(data);
-                            } else if (data.error_code === 400) {
-                                console.log('请主动给bot发送一条消息并检查接收用户ID是否正确。\n');
-                                innerReject(new Error('Invalid chat ID'));
-                            } else if (data.error_code === 401) {
-                                console.log('Telegram bot token 填写错误。\n');
-                                innerReject(new Error('Invalid bot token'));
-                            }
-                        }
-                    } catch (e) {
-                        console.log(`异常发生: ${e}\n`);
-                        innerReject(e);
-                    }
-                });
-            });
-        };
+                try {
+                    const data = await new Promise((resolve) => {
+                        $.post(options, (err, resp, data) => {
+                            resolve({ err, resp, data });
+                        });
+                    });
 
-        let tokenIndex = 0;
-
-        const trySendingMessage = () => {
-            sendMessageWithToken(tokenIndex)
-                .then((result) => {
-                    resolve(result);
-                })
-                .catch((error) => {
-                    tokenIndex++;
-                    if (tokenIndex < B_TG_BOT_TOKENS.length) {
-                        trySendingMessage();
+                    if (data.err) {
+                        console.log(`Telegram使用Token ${token}发送通知消息失败，请检查机器人是否所属填写ID频道成员！！\n`);
+                        console.log(data.err);
                     } else {
-                        reject(new Error('所有的 Token 都尝试发送失败。'));
+                        const responseData = JSON.parse(data.data);
+                        if (responseData.ok) {
+                            console.log(`Telegram（实物中奖消息）使用Token ${token}发送通知消息成功到频道 ${userId} 🎉。\n`);
+                            successChannels.add(userId); // Mark channel as successfully notified
+                        } else if (responseData.error_code === 400) {
+                            console.log('请主动给bot发送一条消息并检查接收用户ID是否正确。\n');
+                        } else if (responseData.error_code === 401) {
+                            console.log('Telegram bot token 填写错误。\n');
+                        }
                     }
-                });
-        };
+                } catch (e) {
+                    console.log(`使用Token ${token}发送消息时发生错误：\n`);
+                    console.log(e);
+                } finally {
+                    await sleep(2000); // Pause for 2 seconds between each iteration
+                }
+            }
+        }
 
-        trySendingMessage();
+        resolve();
     });
 }
 
