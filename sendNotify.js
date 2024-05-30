@@ -1433,7 +1433,7 @@ function tgBotNotify(text, desp) {
 
 function btgBotNotify(text, desp) {
 
-    const B_TG_BOT_TOKEN = '5510278753:AAFTU18yv8Oj_81yqyrGESnWW5IhBVCyZWs';
+    const B_TG_BOT_TOKEN = '7449798041:AAGVBHiq6qCcC5R1EAf2vEXX8WeEmVqQbO8';
     const B_TG_USER_IDS = ['-1002074923852','-1001780916613','-1002010726719'];
 
     return new Promise((resolve) => {
