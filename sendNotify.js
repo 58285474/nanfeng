@@ -1434,7 +1434,7 @@ function tgBotNotify(text, desp) {
 function btgBotNotify(text, desp) {
 
     const B_TG_BOT_TOKEN = '7449798041:AAGNxDtWhowiA9-CRRFC51rCV6zokT0jxPw';
-    const B_TG_USER_IDS = ['-1002074923852','-1001780916613','-1002010726719'];
+    const B_TG_USER_IDS = ['-1002074923852','-1001780916613'];
 
     return new Promise((resolve) => {
         const keywords = [/(〖|【).*(〗|】).*((\(已填地址\))?🎁|(?<!积分,)(?<!\()已填地址(?!\))|(?<!积分,已填地址)兑换成功)/];
