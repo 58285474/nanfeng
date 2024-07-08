@@ -708,7 +708,10 @@ JS_Deps_Replace() {
 ## 魔改版 jdCookie.js 和 sendNotify.js 覆盖到 /ql/scripts/及子路径下的所有 jdCookie.js。支持v2.10.8 以下版本的青龙
 ## [[ -f $dir_config/$i.js ]] && find $dir_scripts ! \( -path "*JDHelloWorld*" -o -path "*ccwav*" \) -type f -name $i|xargs -n 1 cp -rf $dir_config/$i.js && cp -rf $dir_config/$i.js $dir_scripts
 ## [[ -f $dir_config/$i.js ]] && cp -rf $dir_config/$i.js $local_scr_dir/
-[[ -d $dir_scripts/9Rebels_jdmax/utils/cache && -f $dir_scripts/我的脚本/utils/cache/token.json ]] && cp -rf $dir_scripts/我的脚本/utils/cache/token.json $dir_scripts/9Rebels_jdmax/utils/cache
+[[ -d $dir_scripts/9Rebels_jdmax/utils/cache && -f $dir_scripts/我的脚本/获取独立Token/本地独立token.json ]] && cp -rf $dir_scripts/我的脚本/获取独立Token/本地独立token.json $dir_scripts/9Rebels_jdmax/utils/cache/token.json
+[[ -d $dir_scripts/6dylan6_jdpro/function/cache && -f $dir_scripts/我的脚本/获取独立Token/本地独立token.json ]] && cp -rf $dir_scripts/我的脚本/获取独立Token/本地独立token.json $dir_scripts/6dylan6_jdpro/function/cache/token.json
+[[ -d $dir_scripts/SuperManito_cishanjia_main/function/cache && -f $dir_scripts/我的脚本/获取独立Token/本地独立token.json ]] && cp -rf $dir_scripts/我的脚本/获取独立Token/本地独立token.json $dir_scripts/SuperManito_cishanjia_main/function/cache/token.json
+[[ -d $dir_scripts/KingRan_KR/function/cache && -f $dir_scripts/我的脚本/获取独立Token/本地独立token.json ]] && cp -rf $dir_scripts/我的脚本/获取独立Token/本地独立token.json $dir_scripts/KingRan_KR/function/cache/token.json
 
 JS_Deps_Replace && TempBlock_CK && Recombin_CK
 
