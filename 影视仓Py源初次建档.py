@@ -17,7 +17,7 @@ class Spider(Spider):
     PY_DIR    = "/storage/emulated/0/影视仓本地线路/智能接口/py"
     JS_DIR    = "/storage/emulated/0/影视仓本地线路/智能接口/js"
     JAR_DIR   = "/storage/emulated/0/影视仓本地线路/智能接口/jar"
-    SAVE_PATH = "/storage/emulated/0/影视仓本地线路/智能接口/智能接口.json"
+    SAVE_PATH = "/storage/emulated/0/影视仓本地线路/智能接口/智能刷新接口.json"
     LOGO_PATH = "/https://img.freepik.com/free-vector/cute-dolphin-swimming-cartoon-vector-icon-illustration-animal-nature-icon-isolated-flat-vector_138676-12582.jpg?semt=ais_hybrid&w=740&q=80"
 
     # 🔒 锁定在 sites 第 0、1 位的配置，无论扫描结果如何始终存在
