@@ -26,7 +26,7 @@ class Spider(Spider):
             "name": "智能加载",
             "key": "智能加载",
             "type": 3,
-            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/EHR663/refs/heads/main/py/智能加载v5.1.py"
+            "api": "https://raw.githubusercontent.com/58285474/nanfeng/main/影视仓Py源初次建档.py"
          },
 		{
             "name": "弹幕 TG @hshsjk9",
